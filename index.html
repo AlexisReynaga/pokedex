@@ -8,10 +8,81 @@
   </head>
 
   <body class="bg-gray-50 text-gray-800">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
+      <nav
+        class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <a href="#" class="font-bold tracking-tight text-xl">Alexis.dev</a>
+        <button
+          id="menuBtn"
+          class="md:hidden p-2 rounded hover:bg-gray-100"
+          aria-label="Abrir menú"
+        >
+          <!-- Icono burger -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <ul id="menu" class="hidden md:flex gap-6 items-center text-sm">
+          <li>
+            <a
+              href="https://github.com/alexisreynaga"
+              target="_blank"
+              class="inline-flex items-center gap-2 px-3 py-1.5 border rounded-md hover:bg-gray-50"
+              >GitHub
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                class="w-4 h-4"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.85 3.14 8.96 7.49 10.41.55.1.75-.24.75-.53 0-.26-.01-1.11-.02-2.01-3.05.66-3.69-1.3-3.69-1.3-.5-1.26-1.22-1.6-1.22-1.6-.99-.67.08-.66.08-.66 1.09.08 1.67 1.12 1.67 1.12.98 1.67 2.58 1.19 3.21.9.1-.71.38-1.19.69-1.47-2.44-.28-5-1.22-5-5.42 0-1.2.43-2.18 1.12-2.95-.11-.28-.49-1.42.11-2.96 0 0 .93-.3 3.05 1.13.88-.24 1.83-.36 2.77-.36.94 0 1.9.12 2.78.36 2.11-1.43 3.04-1.13 3.04-1.13.6 1.54.22 2.68.11 2.96.7.77 1.12 1.75 1.12 2.95 0 4.21-2.57 5.13-5.01 5.4.39.34.74 1.01.74 2.04 0 1.47-.01 2.66-.01 3.02 0 .29.19.64.75.53 4.35-1.45 7.49-5.56 7.49-10.41C23.02 5.24 18.27.5 12 .5Z"
+                /></svg
+            ></a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Menú móvil -->
+      <ul id="menuMobile" class="md:hidden hidden border-t bg-white">
+        <li>
+          <a href="#about" class="block px-4 py-3 hover:bg-gray-50">Sobre mí</a>
+        </li>
+        <li>
+          <a href="#projects" class="block px-4 py-3 hover:bg-gray-50"
+            >Proyectos</a
+          >
+        </li>
+        <li>
+          <a href="#skills" class="block px-4 py-3 hover:bg-gray-50"
+            >Habilidades</a
+          >
+        </li>
+        <li>
+          <a href="#contact" class="block px-4 py-3 hover:bg-gray-50"
+            >Contacto</a
+          >
+        </li>
+      </ul>
+    </header>
+
     <main class="max-w-xl mx-auto p-6">
-    <h3> Este es un ejemplo de uso de API'S el cual permite buscar por numero o
-        nombre cualquiera de los pokemons que nos porporciona la API </h3>
-        <br>
+      <h3>
+        Este es un ejemplo de uso de API'S el cual permite buscar por numero o
+        nombre cualquiera de los pokemons que nos porporciona la API
+      </h3>
+      <br />
       <h1 class="text-3xl font-black text-center">Mini Pokédex</h1>
       <p class="text-center text-gray-600">
         Busca por nombre o ID (ej. <em>pikachu</em> o <em>25</em>)
@@ -86,5 +157,21 @@
       // Demo inicial
       searchPokemon("pikachu");
     </script>
+
+    <footer
+      class="mt-16 py-10 text-center border-t bg-gray-50 text-sm text-gray-600"
+    >
+      <p>
+        Hecho por
+        <a
+          href="https://alexisreynaga.github.io/portafolio/"
+          class="text-blue-700 hover:underline"
+          >Alexis Saúl López Reynaga</a
+        >
+      </p>
+      <p class="mt-2">
+        © <span id="year"></span> Todos los derechos reservados.
+      </p>
+    </footer>
   </body>
 </html>
