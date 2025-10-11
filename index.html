@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Pokédex</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body class="bg-gray-50 text-gray-800">
+    <main class="max-w-xl mx-auto p-6">
+    <h3> Este es un ejemplo de uso de API'S el cual permite buscar por numero o
+        nombre cualquiera de los pokemons que nos porporciona la API </h3>
+        <br>
+      <h1 class="text-3xl font-black text-center">Mini Pokédex</h1>
+      <p class="text-center text-gray-600">
+        Busca por nombre o ID (ej. <em>pikachu</em> o <em>25</em>)
+      </p>
+
+      <form id="f" class="mt-6 flex gap-2">
+        <input
+          id="q"
+          class="flex-1 border rounded-lg px-3 py-2"
+          placeholder="pikachu"
+          required
+        />
+        <button class="px-4 py-2 rounded-lg bg-blue-600 text-white">
+          Buscar
+        </button>
+      </form>
+
+      <section
+        id="card"
+        class="mt-6 p-6 bg-white border rounded-2xl shadow-sm hidden"
+      ></section>
+      <p id="err" class="mt-4 text-red-600 text-sm hidden"></p>
+    </main>
+
+    <script>
+      const form = document.getElementById("f");
+      const q = document.getElementById("q");
+      const card = document.getElementById("card");
+      const err = document.getElementById("err");
+
+      async function searchPokemon(nameOrId) {
+        err.classList.add("hidden");
+        card.classList.add("hidden");
+        const term = (nameOrId || "").toString().trim().toLowerCase();
+        if (!term) return;
+        try {
+          const res = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(term)}`
+          );
+          if (!res.ok) throw new Error("No encontrado");
+          const p = await res.json();
+          const types = p.types.map((t) => t.type.name).join(", ");
+          card.innerHTML = `
+<div class="flex items-center gap-6">
+<img src="${
+            p.sprites.other["official-artwork"].front_default ||
+            p.sprites.front_default
+          }" alt="${p.name}" class="w-32 h-32 object-contain" />
+<div>
+<h2 class="text-2xl font-bold capitalize">${
+            p.name
+          } <span class="text-gray-500 text-base">#${p.id}</span></h2>
+<p class="text-sm text-gray-600">Altura: ${p.height} • Peso: ${p.weight}</p>
+<p class="text-sm mt-1"><strong>Tipos:</strong> ${types}</p>
+<p class="text-sm mt-1"><strong>Stats:</strong> ${p.stats
+            .map((s) => `${s.stat.name}: ${s.base_stat}`)
+            .join(" · ")}</p>
+</div>
+</div>`;
+          card.classList.remove("hidden");
+        } catch (e) {
+          err.textContent =
+            "No se encontró el Pokémon. Intenta con otro nombre/ID.";
+          err.classList.remove("hidden");
+        }
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        searchPokemon(q.value);
+      });
+      // Demo inicial
+      searchPokemon("pikachu");
+    </script>
+  </body>
+</html>
